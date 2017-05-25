@@ -18,28 +18,58 @@
     }
 
     // Regular
+    console.log('hello');
 
     // Interpolated
+    console.log('Hello I am a %s string!', 'small');
 
     // Styled
+    console.log('%c I am a great text', 'color: yellow; background: black'); //don't forget the %c to stylize
 
     // warning!
+    console.warn('OH NOOO!');
 
     // Error :|
+    console.error('BOOOM!');
 
     // Info
+    console.info('You are pretty!');
 
     // Testing
+    console.assert(1 === 2, 'This is wrong!'); // it only shows the message if the assert fails
 
     // clearing
+    console.clear();
 
     // Viewing DOM Elements
+    const p = document.querySelector('p');
+    console.log(p);
+    console.dir(p); 
 
     // Grouping together
+    dogs.forEach(dog => { 
+      console.groupCollapsed(`${dog.name}`);
+      //console.group(`${dog.name}`);
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} has ${dog.age} years old`);
+      console.groupEnd(`${dog.name}`);
+    });
 
     // counting
+    console.count('Wes');
+    console.count('Wes');
 
     // timing
+    console.time('fetching data');
+    fetch('https://api.github.com/users/moke-rs')
+      .then(data => data.json())
+      .then(data => { 
+        console.log(data);
+        console.timeEnd('fetching data'); 
+      });
+    
+    //trace
+    console.trace('oi');
 
   </script>
 </body>

@@ -98,7 +98,46 @@
     </div>
   </div>
 
-<script>
-</script>
+  <script>
+    const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+    const arrCheckboxes = [...checkboxes];
+    let shiftPressed = false
+    let indexFirstChecked = -1;
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Shift')
+        shiftPressed = true;
+     });
+    window.addEventListener('keyup', (e) => {
+      if (e.key === 'Shift')
+        shiftPressed = false;
+     });
+
+    checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
+
+    function handleCheck() {
+      if (shiftPressed) {
+        if (indexFirstChecked === -1) {
+          indexFirstChecked = arrCheckboxes.findIndex(c => c === this);
+        }
+        else {
+          let indexSecondChecked = arrCheckboxes.findIndex(c => c === this);
+
+          if (indexSecondChecked < indexFirstChecked) {
+            const aux = indexFirstChecked;
+            indexFirstChecked = indexSecondChecked;
+            indexSecondChecked = aux;
+          }
+
+          for (let i = indexFirstChecked; i <= indexSecondChecked; i++)
+            if (!arrCheckboxes[i].checked)
+              arrCheckboxes[i].checked = true;
+        }
+      } else {
+        indexFirstChecked = arrCheckboxes.findIndex(c => c === this);
+      }
+    }
+    
+  </script>
 </body>
 </html>
